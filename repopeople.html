@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     
+      <title>Github</title>
+</head>
+<body>
+      <button id="fetch">Load GitHub Users</button>
+      <h1>Github Users</h1>
+       <style>
+             #fetch{
+                  padding:10px 50px;
+                  margin-left: 270px;
+                  margin-top: 20px;
+                  font-size: 20px;
+             }
+             h1{
+           
+           
+                color:rgb(0, 0, 0);
+                padding:10px 270px;
+                font-size:50px;
+               }
+        #info{
+              background-color: rgb(216, 213, 197);
+              padding: 50px;
+             
+              margin-left: 270px;
+              margin-right: 300px;
+              color: black;
+              font-size: 30px;
+              
+            }
+          ul{
+                
+                padding: 40px 100px;
+                
+          }
+           
+           div{
+                 display: flex;
+                 padding: 30px ;
+                
+                 vertical-align: middle;
+           }
+       </style>
+      <section id="info"></section>
+      <script>
+           document.getElementById('fetch').addEventListener('click',loadm);
+           function loadm() {
+                 var req = new XMLHttpRequest();
+                 req.open('GET','https://api.github.com/users');
+              
+                 req.onload = function() {
+                       if(req.status == 200){
+                       
+                        var people = JSON.parse(req.responseText)
+                         var output= ' ';
+                         for(var i in people){
+                          output +=
+                         '<div>' +
+                         '<img src='+people[i].avatar_url+'width="200" height="200">'+
+                           '<ul>' +
+                           'ID: '+people[i].id+" "+ '<br>'+
+                          'Login: '+people[i].login+ 
+                            '</ul>' +
+                           '</div>';
+                             }
+                         
+                             document.getElementById('info').innerHTML= output;
+
+
+
+
+                          
+                           
+
+
+
+                            
+                             
+                       }
+                 }
+                 req.send();
+
+                 
+           }
+      </script>
+</body>
+</html>
